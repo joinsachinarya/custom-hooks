@@ -1,7 +1,11 @@
 import React from 'react'
+import { useOnline } from '../hooks/use-online'
 
 const Test = () => {
-  return (<div>Test</div>)
+  const { isOnline } = useOnline()
+  return (<div>
+    {isOnline ? "Online" : "Offline"}
+  </div>)
 }
 
 export default Test
