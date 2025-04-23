@@ -1,29 +1,33 @@
 const path = require('path')
 const HTMLWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.tsx'),
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "bundle.[contenthash].js"
+        filename: "bundle.[contenthash].js",
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.tsx', '.jsx', '.ts', '.js'],
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template:path.resolve(__dirname, "src/index.html")
+        new HTMLWebpackPlugin({
+            template: path.resolve(__dirname, "src/index.html")
         })
     ],
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
-                test:/\.tsx?$/,
-                use:'ts-loader',
-                exclude:/node_modules/
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
@@ -33,7 +37,8 @@ module.exports = {
         },
         port: 3000,
         hot: true,
-        open: true
+        open: true,
+        historyApiFallback: true
     },
     mode: "development",
 }

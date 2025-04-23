@@ -1,7 +1,9 @@
-import React from "react"
+import { useState, useEffect } from "react"
+
 export function useOnline() {
-    return (<>
-        Hello
-    </>)
+    const [isOnline, setIsOnline] = useState('')
+
+
+    return { isOnline }
 }
 
